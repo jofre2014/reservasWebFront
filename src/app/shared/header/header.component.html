@@ -20,7 +20,10 @@
         <ul class="navbar-nav mr-auto">         
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span _ngcontent-c0="" class="fas fa-user-circle"></span>
+              <span >
+                {{_us.usuario.nombreFantasia}}
+                &nbsp;<i class="fas fa-user-circle"></i>
+              </span>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a href="#" (click)="_us.logout()" class='nav-link pointer'><i class="fa fa-power-off"></i> Logout</a>            

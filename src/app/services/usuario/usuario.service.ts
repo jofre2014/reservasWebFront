@@ -9,7 +9,7 @@ import { of } from 'rxjs/internal/observable/of';
 
 
 @Injectable()
-export class UsuarioService {
+export class UsuarioService {  
   
   usuario: Usuario;
   token: string;
@@ -21,8 +21,9 @@ export class UsuarioService {
     this.cargarStorage();
    }
 
-  guardarStorage( token: string, usuario: Usuario ) {
-    
+   guardarStorage( token: string, usuario: Usuario, nombreFantasia="" ) {
+
+    usuario.nombreFantasia = nombreFantasia;     
     localStorage.setItem( 'token', token );
     localStorage.setItem( 'usuario', JSON.stringify( usuario ) );    
 
@@ -70,7 +71,7 @@ export class UsuarioService {
       .pipe(
         map ( ( resp: any ) => {
 
-          this.guardarStorage( resp.token, resp.usuario);          
+          this.guardarStorage( resp.token, resp.usuario, resp.nombreFantasia);          
           return true;
         })
         ,catchError( err => {
