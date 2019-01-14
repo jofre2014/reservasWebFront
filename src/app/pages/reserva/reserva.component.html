@@ -1,17 +1,15 @@
-
 <div class="container top-margin">
-<div class="row">
-  <div class="col-sm-6">
+  <div class="row">
+    <div class="col-sm-6">
       <div class="card">
-          <div class="card-body">
-              <h5 class="card-title">Seleccione una fecha de reserva</h5>
-              <p class="card-text">
-                  <input class="form-control"
-              placeholder="Datepicker"
-              type="date"
-              placement="bottom">
-              </p>
-            </div>
+        <div class="card-body">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Fecha Reserva" (dateInput)="addEvent('input', $event)"
+              (dateChange)="addEvent('change', $event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
       </div>
     </div>
     <div class="col-sm-6 ">
@@ -19,85 +17,77 @@
         <div class="card-body">
           <h5 class="card-title">Cupos disponibles</h5>
           <div class="card-text">
-              <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Servicio</th>
-                      <th scope="col">Cupos Disponibles</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let cupo of cupos">
-                      <td>{{ cupo.nombreServicio }}</td>
-                      <td>{{ cupo.cantidadCupo }}</td>
-                    </tr>
-                    
-                  </tbody>
-                </table>
-              </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Servicio</th>
+                  <th scope="col">Cupos Disponibles</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cupo of cupos">
+                  <td>{{ cupo.nombreServicio }}</td>
+                  <td>{{ cupo.cantidadCupo }}</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>
 <div class="col-sm-12  center-block">
-    <div class="card border-primary my-4" >
-        <div class="card-header">Voucher</div>
-        <div class="card-body text-primary">
-            <!--h5 class="card-title">Listado de Clientes</h5-->
-            <div class="my-2 text-left">
-                <!--button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">+</button-->
-                <button type="button" class="btn btn-outline-primary">Agregar</button>
-            </div>
-            <div class="alert alert-info" *ngIf="voucher?.length == 0">
-                No hay registros en la base de datos!
-            </div>
-            <table class="table table-bordered table-striped" *ngIf="voucher?.length > 0">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>DNI</th>
-                        <th>Edad</th>
-                        <th>Hotel</th>
-                        <th>Alojado</th>
-                        <th>FechaServ</th>
-                        <th>Telefono</th>
-                        <th>Whatapp</th>
-                        <th>TipoServ</th>
-                        <th>Producto</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let v of voucher">                
-                        <td>{{ v.nombre }}</td>
-                        <td>{{ v.apellido }}</td>
-                        <td>{{ v.dni }}</td>
-                        <td>{{ v.edad }}</td>
-                        <td>{{ v.hotel }}</td>
-                        <td>{{ v.alojado }}</td>
-                        <td>{{ v.fechaServ | date }}</td>
-                        <td>{{ v.telefono }}</td>
-                        <td>{{ v.whatapp }}</td>
-                        <td>{{ v.tipoServ }}</td>
-                        <td>{{ v.producto }}</td>
-                        <td>
-                            <!--button type="button" name="editar" [routerLink]="['/clientes/form',cliente.id]" class="btn btn-primary"> editar</button-->
-                            <button type="button" class="btn btn-outline-success">Editar</button>
-                        </td>
-                        <td>
-                            <!--button type="button" name="elimnar" (click)="delete(cliente)" class="btn btn-danger"> eliminar</button-->
-                            <button type="button" class="btn btn-outline-danger">Eliminar</button>
-                        </td>
-      
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="card border-primary my-4">
+    <div class="card-header text-center">Voucher </div>
+    <div class="card-body text-primary">
+      <!--h5 class="card-title">Listado de Clientes</h5-->
+      <div class="my-2 text-left">
+        <!--button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">+</button-->
+        <button type="button" class="fa fa-plus btn btn-outline-primary"></button>
+      </div>
+      <div class="alert alert-info" *ngIf="voucher?.length == 0">
+        No hay registros en la base de datos!
+      </div>
+      <table class="table table-bordered table-striped" *ngIf="voucher?.length > 0">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Edad</th>
+            <th>Hotel</th>
+            <th>Alojado</th>
+            <th>Telefono</th>
+            <th>Whatapp</th>
+            <th>Producto</th>
+            <th>Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of voucher">
+            <td>{{ v.nombre }}</td>
+            <td>{{ v.apellido }}</td>
+            <td>{{ v.dni }}</td>
+            <td>{{ v.edad }}</td>
+            <td>{{ v.hotel }}</td>
+            <td>{{ v.alojado }}</td>
+            <td>{{ v.telefono }}</td>
+            <td>{{ v.whatapp }}</td>
+            <td>{{ v.producto }}</td>
+            <td>
+              <!--button type="button" name="editar" [routerLink]="['/clientes/form',cliente.id]" class="btn btn-primary"> editar</button-->
+              <button type="button" class="btn btn-outline-success">Editar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn-group float-right mt-2" role="group">
+        <button type="button" class="btn btn-outline-primary ali">Reservar</button>
+        <button type="button" class="btn btn-outline-primary ali">Reservar y Confirmar</button>
       </div>
     </div>
-
-
+  </div>
+</div>

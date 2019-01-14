@@ -8,15 +8,11 @@ import { PersonsComponent } from './persons/persons.component';
 import { RouterModule } from '@angular/router';
 import { ReservaComponent } from './reserva/reserva.component';
 
+import { MaterialModule } from '../material/material.module';
+
 @NgModule({
-  declarations: [WellcomeComponent, PersonsComponent, ReservaComponent],
-  exports:[ WellcomeComponent, PersonsComponent, ReservaComponent ],
-  imports: [
-    CommonModule,    
-    SharedModule,
-    PAGES_ROUTES,
-    FormsModule,
-    ReactiveFormsModule 
-  ]  
+	declarations: [ WellcomeComponent, PersonsComponent, ReservaComponent ],
+	exports: [ WellcomeComponent, PersonsComponent, ReservaComponent ],
+	imports: [ CommonModule, SharedModule, PAGES_ROUTES, FormsModule, ReactiveFormsModule, MaterialModule ]
 })
-export class PagesModule { }
+export class PagesModule {}
