@@ -1,16 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body,app-root {
-    height: 100%;
-    margin: 0;
-  }
+html,
+body,
+app-root {
+  height: 100%;
+  margin: 0;
+}
 
 .btn-googleplus {
-color: #ffffff;
-background-color: #dd4b39; }
-.btn-googleplus:hover {
-    color: #ffffff; }
+  color: #ffffff;
+  background-color: #dd4b39;
+}
 
-.top-margin{
-    margin-top: 3%;
-}    
+.btn-googleplus:hover {
+  color: #ffffff;
+}
+
+.top-margin {
+  margin-top: 3%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
