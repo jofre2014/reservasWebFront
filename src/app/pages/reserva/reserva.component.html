@@ -45,13 +45,12 @@
     <div class="card-body text-primary">
       <!--h5 class="card-title">Listado de Clientes</h5-->
       <div class="my-2 text-left">
-        <!--button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">+</button-->
-        <button type="button" class="fa fa-plus btn btn-outline-primary"></button>
+        <button type="button" class="fa fa-plus btn btn-outline-primary" (click)="openFormModal()"></button>
       </div>
-      <div class="alert alert-info" *ngIf="voucher?.length == 0">
+      <div class="alert alert-info" *ngIf="reservas?.length == 0">
         No hay registros en la base de datos!
       </div>
-      <table class="table table-bordered table-striped" *ngIf="voucher?.length > 0">
+      <table class="table table-bordered table-striped" *ngIf="reservas?.length > 0">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -67,16 +66,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let v of voucher">
+          <tr *ngFor="let v of reservas">
             <td>{{ v.nombre }}</td>
             <td>{{ v.apellido }}</td>
             <td>{{ v.dni }}</td>
             <td>{{ v.edad }}</td>
-            <td>{{ v.hotel }}</td>
+            <td>{{ v.hotel.nombre }}</td>
             <td>{{ v.alojado }}</td>
             <td>{{ v.telefono }}</td>
             <td>{{ v.whatapp }}</td>
-            <td>{{ v.producto }}</td>
+            <td>{{ v.producto.nombre }}</td>
             <td>
               <!--button type="button" name="editar" [routerLink]="['/clientes/form',cliente.id]" class="btn btn-primary"> editar</button-->
               <button type="button" class="btn btn-outline-success">Editar</button>

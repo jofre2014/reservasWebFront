@@ -1,0 +1,121 @@
+<div class="modal fade " id="ventana" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header card bg-dark text-white">
+        <h5 class="modal-title text-center" id="exampleModalCenterTitle">Datos para la Reserva</h5>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="myForm">
+          <div class="modal-boy card-body bg-light ">
+
+            <div class="form-group">
+              <mat-form-field class="example-container">
+                <input matInput placeholder="Nombre" formControlName="nombre" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }">
+              </mat-form-field>
+              <div *ngIf="submitted && f.nombre.errors" class="text-danger">
+                <div *ngIf="f.nombre.errors.required">El nombre es requerido</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <mat-form-field class="example-container">
+                <input matInput placeholder="Apellido" formControlName="apellido">
+              </mat-form-field>
+              <div *ngIf="submitted && f.apellido.errors" class="text-danger">
+                <div *ngIf="f.apellido.errors.required">El apellido es requerido</div>
+              </div>
+            </div>
+            <table class="example-full-width" cellspacing="0">
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <mat-form-field class="example-container">
+                      <input matInput placeholder="DNI" formControlName="dni">
+                    </mat-form-field>
+                    <div *ngIf="submitted && f.dni.errors" class="text-danger">
+                      <div *ngIf="f.dni.errors.required">El dni es requerido</div>
+                      <div *ngIf="f.dni.errors.pattern">ingrese un dni válido</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <mat-form-field class="example-container">
+                      <input matInput placeholder="Edad" formControlName="edad">
+                    </mat-form-field>
+                    <div *ngIf="submitted && f.edad.errors" class="text-danger">
+                      <div *ngIf="f.edad.errors.required">La edad es requerida</div>
+                      <div *ngIf="f.edad.errors.pattern">ingrese una edad válida</div>
+                      <div *ngIf="f.edad.errors.maxLength">ingrese un valor entre 1 y 99</div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <table class="example-full-width" cellspacing="0">
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <mat-form-field class="example-container">
+                      <input matInput placeholder="Telefono" formControlName="telefono">
+                    </mat-form-field>
+                    <div *ngIf="submitted && f.telefono.errors" class="text-danger">
+                      <div *ngIf="f.telefono.errors.required">El teléfono es requerido</div>
+                      <div *ngIf="f.telefono.errors.pattern">ingrese un teléfono válido</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group text-right">
+                    <mat-checkbox formControlName="whatsapp">WhatsApp</mat-checkbox>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div class="form-group">
+              <mat-form-field>
+                <mat-select placeholder="Producto" formControlName="producto" aria-required="true">
+                  <mat-option (onSelectionChange)="change($event)" *ngFor="let producto of productos" [value]="producto">
+                    {{ producto.nombre }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="submitted && f.producto.errors" class="text-danger">
+                <div *ngIf="f.producto.errors.required">El producto es requerido</div>
+              </div>
+            </div>
+            <table class="example-full-width" cellspacing="0">
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <mat-form-field>
+                      <mat-select placeholder="Hotel" formControlName="hotel">
+                        <mat-option *ngFor="let hotel of hoteles" [value]="hotel">
+                          {{ hotel.nombre }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="submitted && f.hotel.errors" class="text-danger">
+                      <div *ngIf="f.hotel.errors.required">El hotel es requerido</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <mat-checkbox formControlName="alojado">Alojado</mat-checkbox>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="cerrarModal()">
+              Cerrar
+            </button>
+            <button class="btn btn-success" (click)="cargar()">Agregar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

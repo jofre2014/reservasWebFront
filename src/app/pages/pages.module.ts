@@ -10,9 +10,22 @@ import { ReservaComponent } from './reserva/reserva.component';
 
 import { MaterialModule } from '../material/material.module';
 
+import { FormModalComponent } from './reserva/form-modal.component';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
-	declarations: [ WellcomeComponent, PersonsComponent, ReservaComponent ],
-	exports: [ WellcomeComponent, PersonsComponent, ReservaComponent ],
-	imports: [ CommonModule, SharedModule, PAGES_ROUTES, FormsModule, ReactiveFormsModule, MaterialModule ]
+	declarations: [ WellcomeComponent, PersonsComponent, ReservaComponent, FormModalComponent ],
+	exports: [ WellcomeComponent, PersonsComponent, ReservaComponent, FormModalComponent ],
+	imports: [
+		NgbModule.forRoot(),
+		CommonModule,
+		SharedModule,
+		PAGES_ROUTES,
+		FormsModule,
+		ReactiveFormsModule,
+		MaterialModule
+	],
+	entryComponents: [ FormModalComponent ]
 })
 export class PagesModule {}
