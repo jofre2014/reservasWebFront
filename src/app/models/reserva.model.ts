@@ -2,6 +2,7 @@ import { Producto } from './producto.model';
 
 export class Reserva {
 	constructor(
+		public id: number,
 		public nombre: string,
 		public apellido: string,
 		public dni: number,
@@ -10,6 +11,7 @@ export class Reserva {
 		public alojado: boolean,
 		public telefono: number,
 		public whatapp: boolean,
-		public producto: string
+		public producto: string,
+		public accion: string
 	) {}
 }

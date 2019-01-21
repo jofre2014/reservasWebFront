@@ -35,3 +35,12 @@ body {
   font-size: 8pt;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}

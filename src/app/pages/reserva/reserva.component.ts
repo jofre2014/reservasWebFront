@@ -1,6 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { Voucher } from 'src/app/models/voucher.model';
-import { VOUCHER } from 'src/app/models/voucher.json';
+
 import { ReservaService } from 'src/app/services/reserva/reserva.service';
 import { Cupos } from 'src/app/models/cupos.model';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -12,7 +11,6 @@ import { Reserva } from 'src/app/models/reserva.model';
 import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/services/service.index';
 import { ComponenteItem } from 'src/app/shared/modal/componente-item';
-import { EjemploModalComponent } from 'src/app/shared/ejemplo-modal/ejemplo-modal.component';
 
 @Component({
 	selector: 'app-reserva',
@@ -22,8 +20,8 @@ import { EjemploModalComponent } from 'src/app/shared/ejemplo-modal/ejemplo-moda
 export class ReservaComponent implements OnInit {
 	model;
 	events: string[] = [];
-	voucher: Voucher[]; //VOUCHER;
 	reservas: Reserva[] = [];
+
 	cupos: Cupos[] = [];
 	cup: any[] = [];
 
@@ -31,20 +29,32 @@ export class ReservaComponent implements OnInit {
 	constructor(private reservaService: ReservaService, private modalService: NgbModal, public _ms: ModalService) {}
 
 	ngOnInit() {
+		console.log('REservas.... ', this.reservas);
+
 		//=============== Me subscribo a la respuesta del modal ==============
 		this.subscription = this._ms.getRespuesta().subscribe((respuesta: Reserva) => {
-			console.log(respuesta);
-			this.reservas.push(respuesta);
+			if (respuesta.accion == 'alta') {
+				let cont: number = this.reservas.length + 1;
+				respuesta.id = cont;
+				this.reservas.push(respuesta);
+			} else {
+				this.reservas.map((res) => {
+					if (res.id == respuesta.id) {
+						(res.nombre = respuesta.nombre),
+							(res.apellido = respuesta.apellido),
+							(res.alojado = respuesta.alojado),
+							(res.accion = respuesta.accion),
+							(res.dni = respuesta.dni),
+							(res.edad = respuesta.edad),
+							(res.hotel = respuesta.hotel),
+							(res.producto = respuesta.producto),
+							(res.telefono = respuesta.telefono),
+							(res.whatapp = respuesta.whatapp);
+					}
+				});
+			}
 		});
 		//=============== Fin Subscripcion a la respuesta modal ===============
-		//this.voucher = JSON.parse(localStorage.getItem('reserva'));
-		//console.log('reserva: ', this.voucher[0]);
-		/*console.log('obteniendo reseva: ', this.voucher);
-		console.log('nombre: ', this.voucher);
-
-		const mapped = Object.entries(this.voucher).map(([ type, value ]) => ({ type, value }));
-
-		console.log(mapped);*/
 	}
 
 	addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -56,25 +66,25 @@ export class ReservaComponent implements OnInit {
 		this.reservaService.getCupos(fechaReserva).subscribe((cupDevueltos) => (this.cupos = cupDevueltos));
 	}
 
-	openFormModal() {
-		this._ms.sendComponent(new ComponenteItem(FormModalComponent, { nombre: 'Juan', apellido: 'Gomez' }));
-		//this._ms.sendComponent(new ComponenteItem(EjemploModalComponent, { nombre: 'Juan', apellido: 'Gomez' }));
-		/*
-		const modalRef = this.modalService.open(FormModalComponent);
-		modalRef.componentInstance.id = 10; // should be the id
+	openFormModal(reserva, altaEditar) {
+		this._ms.sendComponent(new ComponenteItem(FormModalComponent, { data: reserva, accion: altaEditar }));
+	}
 
-		modalRef.result
-			.then((result) => {
-				console.log(result);
-			})
-			.catch((error) => {
-				console.log(error);
-			});*/
+	editarFormModal(reserva) {
+		this._ms.sendComponent(new ComponenteItem(FormModalComponent, { data: reserva }));
 	}
 
 	ngOnDestroy(): void {
 		if (this.subscription) {
 			this.subscription.unsubscribe();
 		}
+	}
+
+	reservar() {
+		console.log('Reserva: ', this.reservas);
+	}
+
+	EliminarPax(v) {
+		this.reservas.splice(v.id - 1, 1);
 	}
 }

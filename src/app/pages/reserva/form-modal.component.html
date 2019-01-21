@@ -74,7 +74,8 @@
             </table>
             <div class="form-group">
               <mat-form-field>
-                <mat-select placeholder="Producto" formControlName="producto" aria-required="true">
+                <mat-select [(ngModel)]="prod" placeholder="Producto" formControlName="producto">
+                  <mat-option>Clear</mat-option>
                   <mat-option (onSelectionChange)="change($event)" *ngFor="let producto of productos" [value]="producto">
                     {{ producto.nombre }}
                   </mat-option>
@@ -82,6 +83,11 @@
               </mat-form-field>
               <div *ngIf="submitted && f.producto.errors" class="text-danger">
                 <div *ngIf="f.producto.errors.required">El producto es requerido</div>
+              </div>
+              <div *ngIf="prod && accion=='editar'">
+                <p>
+                  {{ prod.nombre }}
+                </p>
               </div>
             </div>
             <table class="example-full-width" cellspacing="0">
@@ -97,6 +103,11 @@
                     </mat-form-field>
                     <div *ngIf="submitted && f.hotel.errors" class="text-danger">
                       <div *ngIf="f.hotel.errors.required">El hotel es requerido</div>
+                    </div>
+                    <div *ngIf="hotel && accion=='editar'">
+                      <p>
+                        {{ hotel.nombre }}
+                      </p>
                     </div>
                   </div>
                 </td>
@@ -118,4 +129,7 @@
       </div>
     </div>
   </div>
+  <pre>
+    {{ data.data | json}}
+  </pre>
 </div>

@@ -27,6 +27,20 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 	productos: Producto[] = [];
 	hoteles: Hotel[] = [];
 
+	selectedProd: any;
+
+	idR: number = 0;
+	nombre: string = '';
+	apellido: string = '';
+	dni: number = 0;
+	edad: number = 0;
+	hotel: any;
+	alojado: boolean = false;
+	telefono: number = 0;
+	whatapp: boolean = false;
+	prod: any;
+	accion: string = '';
+
 	constructor(
 		private formBuilder: FormBuilder,
 		public _ms: ModalService,
@@ -35,31 +49,47 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 	) {
 		//config.backdrop = 'static';
 		//config.keyboard = false;
-
-		this.createForm();
 	}
 
 	ngOnInit() {
+		this.accion = this.data.accion;
+		console.log('accion ngOnInit: ', this.accion);
 		$('#ventana').modal('show');
 		this._productoService.getListaProductos().subscribe((pr: any) => {
 			this.productos = pr;
 			console.log('productos: ', this.productos);
+			if (this.data.accion == 'editar') {
+				this.idR = this.data.data.id;
+				this.nombre = this.data.data.nombre;
+				this.apellido = this.data.data.apellido;
+				this.dni = this.data.data.dni;
+				this.edad = this.data.data.edad;
+				this.hotel = this.data.data.hotel;
+				this.alojado = this.data.data.alojado;
+				this.telefono = this.data.data.telefono;
+				this.whatapp = this.data.data.whatapp;
+				this.prod = this.data.data.producto;
+				this.accion = this.data.accion;
+
+				this.createForm();
+			}
 		});
-		//this.createForm();
+
+		this.createForm();
 	}
 
 	private createForm() {
 		const soloNum = `^\\d+$`;
 		this.myForm = this.formBuilder.group({
-			nombre: [ '', Validators.required ],
-			apellido: [ '', Validators.required ],
-			dni: [ '', [ Validators.required, Validators.pattern(soloNum) ] ],
-			edad: [ '', [ Validators.required, Validators.maxLength(2), Validators.pattern(soloNum) ] ],
-			hotel: [ '', Validators.required ],
-			alojado: '',
-			telefono: [ '', Validators.pattern(soloNum) ],
-			whatsapp: '',
-			producto: [ '', Validators.required ]
+			nombre: [ this.nombre, Validators.required ],
+			apellido: [ this.apellido, Validators.required ],
+			dni: [ this.dni, [ Validators.required, Validators.pattern(soloNum) ] ],
+			edad: [ this.edad, [ Validators.required, Validators.maxLength(2), Validators.pattern(soloNum) ] ],
+			hotel: [ this.hotel, Validators.required ],
+			alojado: this.alojado,
+			telefono: [ this.telefono, Validators.pattern(soloNum) ],
+			whatsapp: this.whatapp,
+			producto: [ this.prod, Validators.required ]
 		});
 	}
 
@@ -80,6 +110,7 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 		}
 
 		let reserva: Reserva = {
+			id: this.data.accion == 'editar' ? this.data.data.id : 0,
 			nombre: this.myForm.get('nombre').value,
 			apellido: this.myForm.get('apellido').value,
 			dni: this.myForm.get('dni').value,
@@ -88,7 +119,8 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 			alojado: this.myForm.get('alojado').value,
 			telefono: this.myForm.get('telefono').value,
 			whatapp: this.myForm.get('whatsapp').value,
-			producto: this.myForm.get('producto').value
+			producto: this.myForm.get('producto').value,
+			accion: this.data.accion
 		};
 
 		this._ms.sendRespuesta(reserva);
