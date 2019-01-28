@@ -13,9 +13,16 @@ import { MaterialModule } from '../material/material.module';
 import { FormModalComponent } from './reserva/form-modal.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmarReservaComponent } from './confirmarReserva/confirmar-reserva.component';
 
 @NgModule({
-	declarations: [ WellcomeComponent, PersonsComponent, ReservaComponent, FormModalComponent ],
+	declarations: [
+		WellcomeComponent,
+		PersonsComponent,
+		ReservaComponent,
+		FormModalComponent,
+		ConfirmarReservaComponent
+	],
 	exports: [ WellcomeComponent, PersonsComponent, ReservaComponent, FormModalComponent ],
 	imports: [
 		NgbModule.forRoot(),

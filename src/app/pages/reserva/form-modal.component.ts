@@ -120,7 +120,10 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 			telefono: this.myForm.get('telefono').value,
 			whatapp: this.myForm.get('whatsapp').value,
 			producto: this.myForm.get('producto').value,
-			accion: this.data.accion
+			accion: this.data.accion,
+			fechaServicio: this.data.fecRes,
+			cliente: parseInt(localStorage.getItem('cliente')),
+			nombreFantasia: localStorage.getItem('nombreFantasia')
 		};
 
 		this._ms.sendRespuesta(reserva);

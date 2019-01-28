@@ -20,4 +20,8 @@ export class ReservaService {
 		const url = this.urlBackend + '/api/cupos';
 		return this.http.get<Cupos[]>(`${url}/${fecha}`).pipe(map((res) => res as Cupos[]));
 	}
+
+	getBuscarReservas(textoABuscar: string, confirmada: boolean, campo: string) {
+		textoABuscar = textoABuscar.toLowerCase();
+	}
 }

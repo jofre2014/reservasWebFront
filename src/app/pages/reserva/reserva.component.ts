@@ -22,6 +22,8 @@ export class ReservaComponent implements OnInit {
 	events: string[] = [];
 	reservas: Reserva[] = [];
 
+	fechaReserva: string;
+
 	cupos: Cupos[] = [];
 	cup: any[] = [];
 
@@ -60,18 +62,16 @@ export class ReservaComponent implements OnInit {
 	addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
 		this.events.push(`${type}: ${event.value}`);
 
-		let fechaReserva = `${event.value.getFullYear()}-${('0' + (event.value.getMonth() + 1)).slice(-2)}-${('0' +
+		this.fechaReserva = `${event.value.getFullYear()}-${('0' + (event.value.getMonth() + 1)).slice(-2)}-${('0' +
 			event.value.getDate()).slice(-2)}`;
 
-		this.reservaService.getCupos(fechaReserva).subscribe((cupDevueltos) => (this.cupos = cupDevueltos));
+		this.reservaService.getCupos(this.fechaReserva).subscribe((cupDevueltos) => (this.cupos = cupDevueltos));
 	}
 
 	openFormModal(reserva, altaEditar) {
-		this._ms.sendComponent(new ComponenteItem(FormModalComponent, { data: reserva, accion: altaEditar }));
-	}
-
-	editarFormModal(reserva) {
-		this._ms.sendComponent(new ComponenteItem(FormModalComponent, { data: reserva }));
+		this._ms.sendComponent(
+			new ComponenteItem(FormModalComponent, { data: reserva, accion: altaEditar, fecRes: this.fechaReserva })
+		);
 	}
 
 	ngOnDestroy(): void {
@@ -81,7 +81,7 @@ export class ReservaComponent implements OnInit {
 	}
 
 	reservar() {
-		console.log('Reserva: ', this.reservas);
+		console.log('Reserva: ', JSON.stringify(this.reservas));
 	}
 
 	EliminarPax(v) {

@@ -1,0 +1,20 @@
+<div class="container top-margin">
+  <div class="row">
+    <div class="col-sm-12">
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar" (keyup.enter)="buscarReservas(buscarReserva.value)"
+          #buscarReserva>
+        <button (click)="buscarReservas(buscarReserva.value)" class="btn btn-outline-primary my-2 my-sm-0" type="button">Buscar</button>
+      </form>
+      <mat-divider></mat-divider>
+
+      <div class="card border-primary my-4">
+        <div class="card-header text-center text-primary text">Reservas sin confirmar </div>
+        <div class="card-body text-primary">
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

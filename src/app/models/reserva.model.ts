@@ -12,6 +12,9 @@ export class Reserva {
 		public telefono: number,
 		public whatapp: boolean,
 		public producto: string,
-		public accion: string
+		public accion: string,
+		public fechaServicio: string,
+		public cliente: number,
+		public nombreFantasia: string
 	) {}
 }
