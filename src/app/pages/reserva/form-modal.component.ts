@@ -109,6 +109,10 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 			return;
 		}
 
+		let us = JSON.parse(localStorage.getItem('usuario'));
+
+		console.log('usuario del localstorage: ', us.nombreFantasia);
+
 		let reserva: Reserva = {
 			id: this.data.accion == 'editar' ? this.data.data.id : 0,
 			nombre: this.myForm.get('nombre').value,
@@ -122,8 +126,9 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 			producto: this.myForm.get('producto').value,
 			accion: this.data.accion,
 			fechaServicio: this.data.fecRes,
-			cliente: parseInt(localStorage.getItem('cliente')),
-			nombreFantasia: localStorage.getItem('nombreFantasia')
+			cliente: us.username,
+			nombreFantasia: us.nombreFantasia,
+			confirmada: 0
 		};
 
 		this._ms.sendRespuesta(reserva);
