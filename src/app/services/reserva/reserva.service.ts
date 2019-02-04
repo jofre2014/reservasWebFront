@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { Cupos } from 'src/app/models/cupos.model';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
+import swal from 'sweetalert';
 
 @Injectable({
 	providedIn: 'root'
@@ -23,5 +24,22 @@ export class ReservaService {
 
 	getBuscarReservas(textoABuscar: string, confirmada: boolean, campo: string) {
 		textoABuscar = textoABuscar.toLowerCase();
+	}
+
+	generarReserva(reservas: any[]): Observable<any> {
+		console.log('Servicio Generar Reserva: ', reservas);
+		const url = this.urlBackend + '/api/reservas';
+		return this.http.post<any>(url, reservas, { headers: this.httpHeaders }).pipe(
+			map(
+				(res) =>
+					res == true
+						? swal('Reserva', 'Reserva Generada!', 'success')
+						: swal('Reserva', 'No se puedo generar la reserva.', 'error')
+			),
+			catchError((err) => {
+				swal('Error reserva', err.error.mensaje, 'error');
+				return of(`Bad Promise: ${err}`);
+			})
+		);
 	}
 }

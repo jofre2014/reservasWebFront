@@ -12,7 +12,6 @@ import { MaterialModule } from '../material/material.module';
 
 import { FormModalComponent } from './reserva/form-modal.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmarReservaComponent } from './confirmarReserva/confirmar-reserva.component';
 
 @NgModule({
@@ -24,15 +23,7 @@ import { ConfirmarReservaComponent } from './confirmarReserva/confirmar-reserva.
 		ConfirmarReservaComponent
 	],
 	exports: [ WellcomeComponent, PersonsComponent, ReservaComponent, FormModalComponent ],
-	imports: [
-		NgbModule.forRoot(),
-		CommonModule,
-		SharedModule,
-		PAGES_ROUTES,
-		FormsModule,
-		ReactiveFormsModule,
-		MaterialModule
-	],
+	imports: [ CommonModule, SharedModule, PAGES_ROUTES, FormsModule, ReactiveFormsModule, MaterialModule ],
 	entryComponents: [ FormModalComponent ]
 })
 export class PagesModule {}

@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6 ">
+    <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Cupos disponibles</h5>
@@ -39,13 +39,13 @@
 
   </div>
 </div>
-<div class="col-sm-12  center-block">
+<div class="col-sm-12  center-block" *ngIf="mostrarGrilla">
   <div class="card border-primary my-4">
     <div class="card-header text-center text-primary text">Voucher </div>
     <div class="card-body text-primary">
       <!--h5 class="card-title">Listado de Clientes</h5-->
       <div class="my-2 text-left">
-        <button type="button" class="fa fa-plus btn btn-outline-primary" (click)="openFormModal(v, 'alta')"></button>
+        <button type="button" class="fa fa-plus btn btn-outline-primary" (click)="openFormModal(v, 'alta')" *ngIf="(totalCupos > 0)"></button>
       </div>
 
       <table class="table table-bordered table-striped">
@@ -92,8 +92,8 @@
         </tbody>
       </table>
       <div class="btn-group float-right mt-2 button-row" *ngIf="reservas?.length > 0">
-        <button type="button" class="btn btn-outline-primary" (click)="reservar()">Reservar</button>
-        <button type="button" class="btn btn-outline-primary ">Reservar y Confirmar</button>
+        <button type="button" class="btn btn-outline-primary" (click)="reservar(false)">Reservar</button>
+        <button type="button" class="btn btn-outline-primary" (click)="reservar(true)">Reservar y Confirmar</button>
       </div>
     </div>
   </div>
