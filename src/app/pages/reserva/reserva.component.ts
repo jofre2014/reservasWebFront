@@ -40,6 +40,7 @@ export class ReservaComponent implements OnInit {
 				let cont: number = this.reservas.length + 1;
 				respuesta.id = cont;
 				this.reservas.push(respuesta);
+				this.restarCupos(respuesta.grupo);
 			} else {
 				this.reservas.map((res) => {
 					if (res.id == respuesta.id) {
@@ -98,12 +99,19 @@ export class ReservaComponent implements OnInit {
 			if (res) {
 				this.reservas.length = 0;
 			}
-
-			//swal('Cliente Actualizado', `${res.mensaje} : ${res.cliente.nombre}`, 'success');
 		});
 	}
 
 	EliminarPax(v) {
 		this.reservas.splice(v.id - 1, 1);
+		this.sumarCupos(v.grupo);
+	}
+
+	restarCupos(grupo: number) {
+		this.cupos.filter((c) => c.grupo == grupo).map((c) => (c.cantidadCupo = c.cantidadCupo - 1));
+	}
+
+	sumarCupos(grupo: number) {
+		this.cupos.filter((c) => c.grupo == grupo).map((c) => (c.cantidadCupo = c.cantidadCupo + 1));
 	}
 }

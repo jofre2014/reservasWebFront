@@ -9,6 +9,8 @@ import { ComponenteBaseComponent } from 'src/app/shared/modal/componente.base.co
 import { Person } from 'src/app/models/person.model';
 import { Producto } from 'src/app/models/producto.model';
 import { Hotel } from 'src/app/models/hotel.model';
+import { GrupoProductoService } from 'src/app/services/grupoProducto/grupo-producto.service';
+import { GrupoProducto } from 'src/app/models/grupoProducto';
 
 declare var $: any;
 
@@ -26,6 +28,7 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 
 	productos: Producto[] = [];
 	hoteles: Hotel[] = [];
+	grupoProducto: GrupoProducto;
 
 	selectedProd: any;
 
@@ -45,11 +48,9 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 		private formBuilder: FormBuilder,
 		public _ms: ModalService,
 		public _productoService: ProductoService,
-		public _hotelService: HotelService
-	) {
-		//config.backdrop = 'static';
-		//config.keyboard = false;
-	}
+		public _hotelService: HotelService,
+		public _grupoProducto: GrupoProductoService
+	) {}
 
 	ngOnInit() {
 		this.accion = this.data.accion;
@@ -124,6 +125,7 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 			telefono: this.myForm.get('telefono').value,
 			whatapp: this.myForm.get('whatsapp').value,
 			producto: this.myForm.get('producto').value,
+			grupo: this.grupoProducto.grupoID,
 			accion: this.data.accion,
 			fechaServicio: this.data.fecRes,
 			cliente: us.username,
@@ -147,6 +149,13 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 
 		let traslado: number = event.source.value.traslado;
 		let ptoEncuentro: number = 0; //event.source.value.
+
+		// Recupera Hoteles
 		this._hotelService.getHoteles(traslado, ptoEncuentro).subscribe((res: any) => (this.hoteles = res));
+
+		//busca Grupo al que pertenece
+		this._grupoProducto
+			.getGrupoXProducto(event.source.value.productoID)
+			.subscribe((grp) => (this.grupoProducto = grp));
 	}
 }
