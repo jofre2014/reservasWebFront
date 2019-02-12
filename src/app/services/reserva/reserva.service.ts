@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
-import { Cupos } from 'src/app/models/cupos.model';
+import { Cupos } from 'src/app/dto/cupos.dto';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import swal from 'sweetalert';
+import { Reserva } from 'src/app/models/reserva.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -27,7 +28,6 @@ export class ReservaService {
 	}
 
 	generarReserva(reservas: any[]): Observable<any> {
-		console.log('Servicio Generar Reserva: ', reservas);
 		const url = this.urlBackend + '/api/reservas';
 		return this.http.post<any>(url, reservas, { headers: this.httpHeaders }).pipe(
 			map(
@@ -38,7 +38,29 @@ export class ReservaService {
 			),
 			catchError((err) => {
 				swal('Error reserva', err.error.mensaje, 'error');
-				return of(`Bad Promise: ${err}`);
+				return of(`error: ${err}`);
+			})
+		);
+	}
+
+	listarReservasEstadoConfir(cliente, estado, page): Observable<any[]> {
+		return this.http
+			.get<any[]>(`${this.urlBackend}/api/reservas/confirmadas/${cliente}/${estado}/${page}`)
+			.pipe(map((response: any) => response));
+	}
+
+	confirmarReserva(reservaId: number): Observable<any> {
+		const url = `${this.urlBackend}/api/reservas/confirmarReserva`;
+		return this.http.put(`${url}/${reservaId}`, { headers: this.httpHeaders }).pipe(
+			map((res) => {
+				res == true
+					? swal('Reserva', 'Reserva Confirmada!', 'success')
+					: swal('Reserva', 'No se puedo confirmar la reserva.', 'error');
+			}),
+			catchError((e) => {
+				swal('Error', e.error.mensaje, 'error');
+
+				return throwError(e);
 			})
 		);
 	}

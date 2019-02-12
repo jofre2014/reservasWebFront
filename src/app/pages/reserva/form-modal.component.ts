@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } fro
 
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { Reserva } from 'src/app/models/reserva.model';
+import { Reserva } from 'src/app/dto/reserva.dto';
 
 import { ModalService, ProductoService, HotelService } from 'src/app/services/service.index';
 import { ComponenteBaseComponent } from 'src/app/shared/modal/componente.base.component';
@@ -10,7 +10,7 @@ import { Person } from 'src/app/models/person.model';
 import { Producto } from 'src/app/models/producto.model';
 import { Hotel } from 'src/app/models/hotel.model';
 import { GrupoProductoService } from 'src/app/services/grupoProducto/grupo-producto.service';
-import { GrupoProducto } from 'src/app/models/grupoProducto';
+import { GrupoProducto } from 'src/app/models/grupoProducto.model';
 
 declare var $: any;
 

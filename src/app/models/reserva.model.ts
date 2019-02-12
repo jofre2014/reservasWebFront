@@ -1,22 +1,35 @@
-import { Producto } from './producto.model';
-
-export class Reserva {
-	constructor(
-		public id: number,
-		public nombre: string,
-		public apellido: string,
-		public dni: number,
-		public edad: number,
-		public hotel: string,
-		public alojado: boolean,
-		public telefono: number,
-		public whatapp: boolean,
-		public producto: string,
-		public grupo: number,
-		public accion: string,
-		public fechaServicio: string,
-		public cliente: number,
-		public nombreFantasia: string,
-		public confirmada: number
-	) {}
+export interface Reserva {
+	reservaID: number;
+	negocioID: number;
+	clienteID: number;
+	fechatoma: Date;
+	fechainservicio: Date;
+	fechaoutservicio: Date;
+	fechavencimiento: Date;
+	horavencimiento: Date;
+	avisomail: boolean;
+	pendiente: number;
+	confirmada: number;
+	facturada: number;
+	anulada: number;
+	eliminada: number;
+	verificada: number;
+	nombrepax: string;
+	cantidadpaxs: number;
+	observaciones: string;
+	voucherID: number;
+	pagacomision: number;
+	observcomision: string;
+	comisionpagada: number;
+	pagacacheuta: number;
+	facturadofuera: number;
+	reservaarticulos: string;
+	usuario: string;
+	contacto: string;
+	reservaorigenid: number;
+	facturarextranjero: number;
+	fechaabierta: number;
+	created: Date;
+	updated: Date;
+	uuid: string;
 }

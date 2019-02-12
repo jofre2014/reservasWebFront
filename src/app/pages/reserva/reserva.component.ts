@@ -1,11 +1,11 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 
 import { ReservaService } from 'src/app/services/reserva/reserva.service';
-import { Cupos } from 'src/app/models/cupos.model';
+import { Cupos } from 'src/app/dto/cupos.dto';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 import { FormModalComponent } from './form-modal.component';
-import { Reserva } from 'src/app/models/reserva.model';
+import { Reserva } from 'src/app/dto/reserva.dto';
 import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/services/service.index';
 import { ComponenteItem } from 'src/app/shared/modal/componente-item';
@@ -92,10 +92,7 @@ export class ReservaComponent implements OnInit {
 		if (confirmar) {
 			this.reservas[0].confirmada = 1;
 		}
-		console.log('Reserva: ', JSON.stringify(this.reservas));
-		console.log('Reserva Confirmada?: ', confirmar);
 		this.reservaService.generarReserva(this.reservas).subscribe((res) => {
-			console.log('en el suscribe', res);
 			if (res) {
 				this.reservas.length = 0;
 			}

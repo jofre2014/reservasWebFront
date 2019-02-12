@@ -19,6 +19,7 @@ const pagesRoutes: Routes = [
 			{ path: 'reservas', component: ReservaComponent },
 			{ path: 'reservas/formModal', component: FormModalComponent },
 			{ path: 'confirmarReserva', component: ConfirmarReservaComponent },
+			{ path: 'confirmarReserva/page/:page', component: ConfirmarReservaComponent },
 			{ path: '', pathMatch: 'full', redirectTo: '/wellcome' }
 		]
 	}

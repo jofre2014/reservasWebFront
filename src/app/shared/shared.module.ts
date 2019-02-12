@@ -6,25 +6,26 @@ import { RouterModule } from '@angular/router';
 import { PlaceHolderComponent } from './modal/place.holder.component';
 import { EjemploModalComponent } from './ejemplo-modal/ejemplo-modal.component';
 import { AddComponenteDirective } from './modal/add.componente.directive';
+import { PaginatorComponent } from './paginator/paginator/paginator.component';
 
 @NgModule({
-  declarations: [
-                  NoPageFoundComponent, 
-                  HeaderComponent,
-                  PlaceHolderComponent,
-                  EjemploModalComponent,
-                  AddComponenteDirective
-                ],
-  imports: [
-    CommonModule, RouterModule
-  ],
-  exports:[ 
-            NoPageFoundComponent,
-            HeaderComponent,
-            PlaceHolderComponent,
-            EjemploModalComponent,
-            AddComponenteDirective
-          ],
-  entryComponents: [ EjemploModalComponent ]       
+	declarations: [
+		NoPageFoundComponent,
+		HeaderComponent,
+		PlaceHolderComponent,
+		EjemploModalComponent,
+		AddComponenteDirective,
+		PaginatorComponent
+	],
+	imports: [ CommonModule, RouterModule ],
+	exports: [
+		NoPageFoundComponent,
+		HeaderComponent,
+		PlaceHolderComponent,
+		EjemploModalComponent,
+		AddComponenteDirective,
+		PaginatorComponent
+	],
+	entryComponents: [ EjemploModalComponent ]
 })
-export class SharedModule { }
+export class SharedModule {}
