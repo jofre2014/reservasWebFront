@@ -4,6 +4,7 @@ export interface Producto {
 	observaciones: string;
 	deshabilitado: number;
 	traslado: number;
+	puntoencuentro: number;
 	ventamostrador: number;
 	ventainternet: number;
 	created: Date;

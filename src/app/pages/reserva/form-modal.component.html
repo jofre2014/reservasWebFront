@@ -46,7 +46,7 @@
                     <div *ngIf="submitted && f.edad.errors" class="text-danger">
                       <div *ngIf="f.edad.errors.required">La edad es requerida</div>
                       <div *ngIf="f.edad.errors.pattern">ingrese una edad válida</div>
-                      <div *ngIf="f.edad.errors.maxLength">ingrese un valor entre 1 y 99</div>
+                      <div *ngIf="f.edad.errors.maxlength">ingrese un valor entre 1 y 99</div>
                     </div>
                   </div>
                 </td>
@@ -75,7 +75,6 @@
             <div class="form-group">
               <mat-form-field>
                 <mat-select [(ngModel)]="prod" placeholder="Producto" formControlName="producto">
-                  <mat-option>Clear</mat-option>
                   <mat-option (onSelectionChange)="change($event)" *ngFor="let producto of productos" [value]="producto">
                     {{ producto.nombre }}
                   </mat-option>

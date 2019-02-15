@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Reserva } from 'src/app/dto/reserva.dto';
 
 import { ModalService, ProductoService, HotelService } from 'src/app/services/service.index';
 import { ComponenteBaseComponent } from 'src/app/shared/modal/componente.base.component';
-import { Person } from 'src/app/models/person.model';
+
 import { Producto } from 'src/app/models/producto.model';
 import { Hotel } from 'src/app/models/hotel.model';
 import { GrupoProductoService } from 'src/app/services/grupoProducto/grupo-producto.service';
@@ -27,6 +27,9 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 	myForm: FormGroup;
 
 	productos: Producto[] = [];
+
+	grupos: any[];
+
 	hoteles: Hotel[] = [];
 	grupoProducto: GrupoProducto;
 
@@ -35,11 +38,11 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 	idR: number = 0;
 	nombre: string = '';
 	apellido: string = '';
-	dni: number = 0;
-	edad: number = 0;
+	dni: number = null;
+	edad: number = null;
 	hotel: any;
 	alojado: boolean = false;
-	telefono: number = 0;
+	telefono: number = null;
 	whatapp: boolean = false;
 	prod: any;
 	accion: string = '';
@@ -54,11 +57,15 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 
 	ngOnInit() {
 		this.accion = this.data.accion;
-		console.log('accion ngOnInit: ', this.accion);
-		$('#ventana').modal('show');
-		this._productoService.getListaProductos().subscribe((pr: any) => {
-			this.productos = pr;
-			console.log('productos: ', this.productos);
+		const grupos = this.data.listaGrupos;
+		this._productoService.getProductosXGrupo(grupos).subscribe((res) => {
+			this.grupos = res;
+
+			this.grupos.map((x) => {
+				x.productos.filter((p) => p.ventainternet == 1).forEach((element) => {
+					this.productos.push(element);
+				});
+			});
 			if (this.data.accion == 'editar') {
 				this.idR = this.data.data.id;
 				this.nombre = this.data.data.nombre;
@@ -75,6 +82,8 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 				this.createForm();
 			}
 		});
+
+		$('#ventana').modal('show');
 
 		this.createForm();
 	}
@@ -148,7 +157,7 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 		}
 
 		let traslado: number = event.source.value.traslado;
-		let ptoEncuentro: number = 0; //event.source.value.
+		let ptoEncuentro: number = event.source.value.puntoencuentro; //event.source.value.
 
 		// Recupera Hoteles
 		this._hotelService.getHoteles(traslado, ptoEncuentro).subscribe((res: any) => (this.hoteles = res));

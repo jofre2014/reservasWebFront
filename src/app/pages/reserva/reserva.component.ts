@@ -23,7 +23,7 @@ export class ReservaComponent implements OnInit {
 	fechaReserva: string;
 
 	cupos: Cupos[] = [];
-	cup: any[] = [];
+	gruposConCuposDisponibles: number[] = [];
 
 	mostrarGrilla = false;
 	totalCupos = 0;
@@ -77,8 +77,15 @@ export class ReservaComponent implements OnInit {
 	}
 
 	openFormModal(reserva, altaEditar) {
+		this.gruposConCuposDisponibles = this.cupos.filter((c) => c.cantidadCupo > 0).map((c) => c.grupo);
+
 		this._ms.sendComponent(
-			new ComponenteItem(FormModalComponent, { data: reserva, accion: altaEditar, fecRes: this.fechaReserva })
+			new ComponenteItem(FormModalComponent, {
+				data: reserva,
+				accion: altaEditar,
+				fecRes: this.fechaReserva,
+				listaGrupos: this.gruposConCuposDisponibles
+			})
 		);
 	}
 
