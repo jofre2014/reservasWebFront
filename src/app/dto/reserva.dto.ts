@@ -17,6 +17,9 @@ export class Reserva {
 		public fechaServicio: string,
 		public cliente: number,
 		public nombreFantasia: string,
-		public confirmada: number
+		public confirmada: number,
+		public voucherID: number,
+		public reservaID: number,
+		public fechaServicioOld?: string
 	) {}
 }

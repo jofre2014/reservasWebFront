@@ -4,47 +4,41 @@ import { UsuarioService, PersonService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
 import { NgForm } from '@angular/forms';
 
-
 //declare const gapi: any;
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styles: []
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styles: []
 })
 export class LoginComponent implements OnInit {
-  
-  username:  string;
-  password: string;
-  recuerdame: boolean = false;
+	username: string;
+	password: string;
+	recuerdame: boolean = false;
 
-  auth2: any;
+	auth2: any;
 
-  constructor( private _router: Router,
-               public _us: UsuarioService,
-               public _ps: PersonService ) { }
+	constructor(private _router: Router, public _us: UsuarioService, public _ps: PersonService) {}
 
-  ngOnInit() {    
-    //this.googleInit();
-    this.username = localStorage.getItem('username') || '';
-    if ( this.username.length > 0 ) {
-      this.recuerdame = true;
-    }
-  }
+	ngOnInit() {
+		//this.googleInit();
+		this.username = localStorage.getItem('username') || '';
+		if (this.username.length > 0) {
+			this.recuerdame = true;
+		}
+	}
 
-  
-  ingresar( forma: NgForm ) {     
-    
-      if ( forma.valid  ) {
-          const usuario = new Usuario(  forma.value.username, forma.value.password );
+	ingresar(forma: NgForm) {
+		if (forma.valid) {
+			const usuario = new Usuario(forma.value.username, forma.value.password);
 
-          this._us.loginNormal$( usuario,  forma.value.recuerdame )
-          .subscribe ( correcto => this._router.navigate(['/wellcome']) );
-      }
-  } 
+			this._us
+				.loginNormal$(usuario, forma.value.recuerdame)
+				.subscribe((correcto) => this._router.navigate([ '/reservas' ]));
+		}
+	}
 
-
-  /*googleInit(){
+	/*googleInit(){
 
     gapi.load( 'auth2', () => {
 
@@ -78,6 +72,4 @@ export class LoginComponent implements OnInit {
     }
 
   */
-
 }
-

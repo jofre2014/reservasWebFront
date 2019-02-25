@@ -1,0 +1,21 @@
+version : '3'
+services:  
+  termaliabackend:
+    build:
+      context: . 
+      dockerfile: termaliabackend.dockerfile
+    ports: 
+      - "8088:8088"
+    networks:
+      - net-spring-db
+  termaliafrontend:
+    build:
+      context: . 
+      dockerfile: termaliafrontend.dockerfile
+    ports:
+      - "8087:80"
+    networks:
+      - net-spring-db
+networks:
+  net-spring-db:
+    driver: bridge

@@ -7,10 +7,10 @@ import swal from 'sweetalert';
 
 @Component({
 	selector: 'app-confirmar-reserva',
-	templateUrl: './confirmar-reserva.component.html',
+	templateUrl: './administrar-reserva.component.html',
 	styles: []
 })
-export class ConfirmarReservaComponent implements OnInit, OnChanges {
+export class AdministrarReservaComponent implements OnInit, OnChanges {
 	reservas: Reserva[];
 	paginador: any;
 
@@ -68,6 +68,10 @@ export class ConfirmarReservaComponent implements OnInit, OnChanges {
 				this.paginador = res;
 			});
 		});
+	}
+
+	editarReserva(v) {
+		this._reservaService.getReservaPaxs(v.reservaID).subscribe((res) => console.log('Reservaaaa!!!', res));
 	}
 
 	ngOnChanges() {}

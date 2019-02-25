@@ -1,0 +1,20 @@
+# Generar jar en Backend
+--Por consola, en el directorio raiz donde se encuentra el proyecto ejecutar:
+        mvn clean install -DskipTests
+--Luego, copiar el 'jar' en la carpeta JAR dentro del directorio del frontEnd 
+
+# Generar Front para producción
+-- Ejecutar ng build --prod
+
+# Copiar archivos en el servidor
+- carpeta Dist
+- carpeta jar
+- Archivo docker-compose.yml
+- Archivo nginx.conf
+- Archivo termaliabackend.dockerfile
+- Archivo termaliafrontend.dockerfile
+
+
+# Generando imagenes Docker
+- docker-compose up (Genera y levante las imagenes)
+- docker-compose down --rmi all (elimina todo incluidas las imágenes creadas con docker-compose up)

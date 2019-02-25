@@ -31,7 +31,8 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 	grupos: any[];
 
 	hoteles: Hotel[] = [];
-	grupoProducto: GrupoProducto;
+	grupoProducto: GrupoProducto = null;
+	grupoID: number = null;
 
 	selectedProd: any;
 
@@ -46,6 +47,8 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 	whatapp: boolean = false;
 	prod: any;
 	accion: string = '';
+	voucherID: number;
+	reservaID: number;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -67,6 +70,8 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 				});
 			});
 			if (this.data.accion == 'editar') {
+				console.log('dataaaaaaaaa:' + this.data.data.grupo);
+
 				this.idR = this.data.data.id;
 				this.nombre = this.data.data.nombre;
 				this.apellido = this.data.data.apellido;
@@ -78,6 +83,8 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 				this.whatapp = this.data.data.whatapp;
 				this.prod = this.data.data.producto;
 				this.accion = this.data.accion;
+				this.grupoID = this.data.data.grupo;
+				this.voucherID = this.data.data.voucherID;
 
 				this.createForm();
 			}
@@ -122,6 +129,7 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 		let us = JSON.parse(localStorage.getItem('usuario'));
 
 		console.log('usuario del localstorage: ', us.nombreFantasia);
+		console.log('GrupoID!!!!', this.grupoID);
 
 		let reserva: Reserva = {
 			id: this.data.accion == 'editar' ? this.data.data.id : 0,
@@ -134,13 +142,17 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 			telefono: this.myForm.get('telefono').value,
 			whatapp: this.myForm.get('whatsapp').value,
 			producto: this.myForm.get('producto').value,
-			grupo: this.grupoProducto.grupoID,
+			grupo: this.grupoID != null ? this.grupoID : this.grupoProducto.grupoID,
 			accion: this.data.accion,
 			fechaServicio: this.data.fecRes,
 			cliente: us.username,
 			nombreFantasia: us.nombreFantasia,
-			confirmada: 0
+			confirmada: 0,
+			voucherID: this.voucherID != 0 ? this.voucherID : 0,
+			reservaID: this.reservaID != 0 ? this.reservaID : 0
 		};
+
+		console.log('Cargar REservaaaaaa', reserva);
 
 		this._ms.sendRespuesta(reserva);
 		this.cerrarModal();
@@ -163,8 +175,10 @@ export class FormModalComponent implements ComponenteBaseComponent, OnInit {
 		this._hotelService.getHoteles(traslado, ptoEncuentro).subscribe((res: any) => (this.hoteles = res));
 
 		//busca Grupo al que pertenece
-		this._grupoProducto
-			.getGrupoXProducto(event.source.value.productoID)
-			.subscribe((grp) => (this.grupoProducto = grp));
+		this.getGrupoXProducto(event.source.value.productoID);
+	}
+
+	getGrupoXProducto(prodID) {
+		this._grupoProducto.getGrupoXProducto(prodID).subscribe((grp) => (this.grupoProducto = grp));
 	}
 }

@@ -64,4 +64,9 @@ export class ReservaService {
 			})
 		);
 	}
+
+	getReservaPaxs(idReserva: number): Observable<any> {
+		const url = `${this.urlBackend}/api/reservas/reservaPaxs/${idReserva}`;
+		return this.http.get(url);
+	}
 }

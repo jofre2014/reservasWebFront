@@ -3,10 +3,11 @@ import { PagesComponent } from './pages.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { WellcomeComponent } from './wellcome/wellcome.component';
 import { PersonsComponent } from './persons/persons.component';
-import { ReservaComponent } from './reserva/reserva.component';
+import { ReservaComponent } from './reserva/crearReserva/reserva.component';
 
-import { FormModalComponent } from './reserva/form-modal.component';
-import { ConfirmarReservaComponent } from './confirmarReserva/confirmar-reserva.component';
+import { FormModalComponent } from './reserva/modalReserva/form-modal.component';
+import { AdministrarReservaComponent } from './reserva/administrarReserva/administrar-reserva.component';
+import { EditarReservaComponent } from './reserva/editarReserva/editar-reserva.component';
 
 const pagesRoutes: Routes = [
 	{
@@ -17,9 +18,11 @@ const pagesRoutes: Routes = [
 			{ path: 'wellcome', component: WellcomeComponent },
 			{ path: 'personas', component: PersonsComponent },
 			{ path: 'reservas', component: ReservaComponent },
+			{ path: 'reservas/:accion/:idReserva', component: ReservaComponent },
 			{ path: 'reservas/formModal', component: FormModalComponent },
-			{ path: 'confirmarReserva', component: ConfirmarReservaComponent },
-			{ path: 'confirmarReserva/page/:page', component: ConfirmarReservaComponent },
+			{ path: 'administrarReserva', component: AdministrarReservaComponent },
+			{ path: 'administrarReserva/page/:page', component: AdministrarReservaComponent },
+			{ path: 'editarReserva/:reserva', component: EditarReservaComponent },
 			{ path: '', pathMatch: 'full', redirectTo: '/wellcome' }
 		]
 	}
