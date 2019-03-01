@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-body">
           <mat-form-field>
-            <input matInput (ngModel)="datePicker.value" [matDatepicker]="picker" placeholder="Fecha Reserva"
+            <input matInput [(ngModel)]="datePicker.value" [matDatepicker]="picker" placeholder="Fecha Reserva"
               (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>

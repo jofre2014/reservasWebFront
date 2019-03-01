@@ -8,6 +8,7 @@ import { ReservaComponent } from './reserva/crearReserva/reserva.component';
 import { FormModalComponent } from './reserva/modalReserva/form-modal.component';
 import { AdministrarReservaComponent } from './reserva/administrarReserva/administrar-reserva.component';
 import { EditarReservaComponent } from './reserva/editarReserva/editar-reserva.component';
+import { ErrorsComponent } from './errores/errors.component';
 
 const pagesRoutes: Routes = [
 	{
@@ -23,6 +24,7 @@ const pagesRoutes: Routes = [
 			{ path: 'administrarReserva', component: AdministrarReservaComponent },
 			{ path: 'administrarReserva/page/:page', component: AdministrarReservaComponent },
 			{ path: 'editarReserva/:reserva', component: EditarReservaComponent },
+			{ path: 'error', component: ErrorsComponent },
 			{ path: '', pathMatch: 'full', redirectTo: '/wellcome' }
 		]
 	}

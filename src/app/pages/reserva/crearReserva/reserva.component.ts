@@ -178,6 +178,7 @@ export class ReservaComponent implements OnInit {
 	}
 
 	reservar(confirmar: boolean) {
+		this.reservas[0].fechaServicio = this.fechaReserva;
 		if (confirmar) {
 			this.reservas[0].confirmada = 1;
 		}
