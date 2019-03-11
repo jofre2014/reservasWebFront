@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UsuarioService, PersonService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
 import { NgForm } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 //declare const gapi: any;
 

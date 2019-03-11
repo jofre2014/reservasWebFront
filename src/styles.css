@@ -44,3 +44,7 @@ body {
 .example-margin {
   margin: 0 10px;
 }
+
+.snackbar-style {
+  background: rgb(96, 117, 131);
+}

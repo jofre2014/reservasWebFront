@@ -1,20 +1,26 @@
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
 
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import { LoginComponent } from 'src/app/login/login.component';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Injectable()
 export class ErrorsHandler implements ErrorHandler {
+	usuario: Usuario;
+	token: string;
+
 	constructor(private injector: Injector) {}
 
 	handleError(error: Error | HttpErrorResponse) {
-		console.log('errorHandker');
-
 		const router = this.injector.get(Router);
-		let errores: any[] = [];
 
-		console.log('navigatorrrr:', navigator);
+		// soluciona problema de renderizado de Login------
+		const ngZone = this.injector.get(NgZone);
+		//-------------------------------------------------
+
+		let errores: any[] = [];
 
 		if (error instanceof HttpErrorResponse) {
 			// Server error happened
@@ -27,7 +33,16 @@ export class ErrorsHandler implements ErrorHandler {
 				errores.push(' NO es posible comunicarse con el back end! ');
 			} else if (error.status == 403) {
 				errores.push(' Su sesion ha caducado ');
-				router.navigate([ '/login' ]);
+
+				localStorage.removeItem('token');
+				localStorage.removeItem('usuario');
+
+				this.usuario = null;
+				this.token = '';
+
+				ngZone.run(() => {
+					router.navigate([ '/login' ], { skipLocationChange: true });
+				});
 			} else if (error.status == 401) {
 				errores.push(' Usuario o Contraseña incorrectas ');
 			} else if (error.status == 404) {

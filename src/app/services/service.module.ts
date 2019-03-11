@@ -1,6 +1,12 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsuarioService, ModalService, TokenInterceptorService, RequestInterceptorService } from './service.index';
+import {
+	UsuarioService,
+	ModalService,
+	TokenInterceptorService,
+	RequestInterceptorService,
+	SnackbarService
+} from './service.index';
 import { PersonService } from './person/person.service';
 import { LoginGuardGuard } from './guard/login-guard.guard';
 import { ReservaService } from './reserva/reserva.service';
@@ -16,6 +22,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 		LoginGuardGuard,
 		ReservaService,
 		ModalService,
+		SnackbarService,
 		{
 			provide: ErrorHandler,
 			useClass: ErrorsHandler

@@ -47,6 +47,7 @@ registerLocaleData(localeEs);
 		},
 		{ provide: LOCALE_ID, useValue: 'es' }
 	],
-	bootstrap: [ AppComponent ]
+	bootstrap: [ AppComponent ],
+	exports: [ MaterialModule ]
 })
 export class AppModule {}

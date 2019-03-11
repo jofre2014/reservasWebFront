@@ -1,0 +1,17 @@
+.cabecera {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.mensaje-body {
+  /*background-color: dimgray;*/
+  font-size: 14pt;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: white
+}
+
+.background-snackbar {
+  background: #ffff;
+}

@@ -22,6 +22,13 @@ export class AdministrarReservaComponent implements OnInit, OnChanges {
 
 	buscarReservas(texto: string) {
 		console.log('texto a buscar: ', texto);
+		console.log('reservas antes ', this.reservas);
+		this.reservas.filter((res) => {
+			console.log('nombrepax to lowecase', res.nombrepax.toLowerCase());
+			console.log('texto to lowecase', texto.toLowerCase());
+			return res.nombrepax.toLowerCase() === texto.toLowerCase();
+		});
+		console.log(this.reservas);
 	}
 
 	confirmarReserva(reserva) {

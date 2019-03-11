@@ -7,6 +7,9 @@ import { PlaceHolderComponent } from './modal/place.holder.component';
 import { EjemploModalComponent } from './ejemplo-modal/ejemplo-modal.component';
 import { AddComponenteDirective } from './modal/add.componente.directive';
 import { PaginatorComponent } from './paginator/paginator/paginator.component';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
 	declarations: [
@@ -15,17 +18,20 @@ import { PaginatorComponent } from './paginator/paginator/paginator.component';
 		PlaceHolderComponent,
 		EjemploModalComponent,
 		AddComponenteDirective,
-		PaginatorComponent
+		PaginatorComponent,
+		SnackbarComponent
 	],
-	imports: [ CommonModule, RouterModule ],
+	imports: [ CommonModule, RouterModule, MaterialModule ],
 	exports: [
 		NoPageFoundComponent,
 		HeaderComponent,
 		PlaceHolderComponent,
 		EjemploModalComponent,
 		AddComponenteDirective,
-		PaginatorComponent
+		PaginatorComponent,
+		SnackbarComponent,
+		MaterialModule
 	],
-	entryComponents: [ EjemploModalComponent ]
+	entryComponents: [ EjemploModalComponent, SnackbarComponent ]
 })
 export class SharedModule {}

@@ -43,6 +43,8 @@ import {
 	MatFormFieldModule
 } from '@angular/material';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
 	imports: [
 		CommonModule,
@@ -82,7 +84,8 @@ import {
 		MatTooltipModule,
 		MatTreeModule,
 		MatFormFieldModule,
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		FlexLayoutModule
 	],
 	exports: [
 		MatAutocompleteModule,
@@ -121,7 +124,8 @@ import {
 		MatTooltipModule,
 		MatTreeModule,
 		MatFormFieldModule,
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		FlexLayoutModule
 	],
 	declarations: []
 })

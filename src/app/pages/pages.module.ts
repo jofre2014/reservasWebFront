@@ -17,6 +17,7 @@ import { EditarReservaComponent } from './reserva/editarReserva/editar-reserva.c
 
 import { DatePipe } from '@angular/common';
 import { ErrorsComponent } from './errores/errors.component';
+import { AdminReservaMatComponent } from './reserva/administrarReservaMat/admin-reserva-mat.component';
 
 @NgModule({
 	declarations: [
@@ -26,7 +27,8 @@ import { ErrorsComponent } from './errores/errors.component';
 		FormModalComponent,
 		AdministrarReservaComponent,
 		EditarReservaComponent,
-		ErrorsComponent
+		ErrorsComponent,
+		AdminReservaMatComponent
 	],
 	exports: [ WellcomeComponent, PersonsComponent, ReservaComponent, FormModalComponent ],
 	imports: [ CommonModule, SharedModule, PAGES_ROUTES, FormsModule, ReactiveFormsModule, MaterialModule ],

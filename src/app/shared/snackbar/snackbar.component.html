@@ -1,0 +1,19 @@
+<div class="container" align="center">
+  <div *ngIf="accion=='success'">
+    <img src="../../../assets/images/success.png">
+  </div>
+  <div *ngIf="accion=='warning'">
+    <img src="../../../assets/images/warning.png">
+  </div>
+  <div *ngIf="accion=='error'">
+    <img src="../../../assets/images/error.png">
+  </div>
+  <br>
+  <mat-divider class="background-snackbar"></mat-divider>
+  <br>
+
+  <p class="mensaje-body">
+    {{ mensaje }}
+  </p>
+
+</div>

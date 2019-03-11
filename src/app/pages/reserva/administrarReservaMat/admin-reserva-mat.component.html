@@ -1,0 +1,65 @@
+<div class="container">
+
+  <div>
+    <button (click)="openSnack('mensaje snackbar', 'success')">OpenSnack</button>
+  </div>
+  <div fxLayout fxLayoutAlign="center center" class="top-margin">
+    <mat-form-field fxFlex="40%">
+      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="reservaID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Reserva </th>
+      <td mat-cell *matCellDef="let element"> {{element.reservaID}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechainservicio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Servicio </th>
+      <td mat-cell *matCellDef="let element"> {{element.fechainservicio | date:'yyyy-MM-dd'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombrepax">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Pax </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombrepax}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cantidadpaxs">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad Paxs </th>
+      <td mat-cell *matCellDef="let element"> {{element.cantidadpaxs}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="confirmar">
+      <th mat-header-cell *matHeaderCellDef> Confirmar </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" (click)="confirmarReserva(element.reservaID)">
+          <mat-icon class="mat-18">done</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef> Editar </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" [routerLink]="['/reservas', 'editar', element.reservaID]">
+          <mat-icon class="mat-18">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="anular">
+      <th mat-header-cell *matHeaderCellDef> Anular </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="openSnack('En construcción', 'warning')">
+          <mat-icon class="mat-18">cancel</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10,15, 20]" class="mat-elevation-z8">
+  </mat-paginator>
+</div>
