@@ -15,6 +15,7 @@
 - Archivo termaliafrontend.dockerfile
 
 
+
 # Generando imagenes Docker
 - docker-compose up (Genera y levante las imagenes)
 - docker-compose down --rmi all (elimina todo incluidas las imágenes creadas con docker-compose up)

@@ -36,6 +36,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.text-info {
+  font-size: 12pt;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+}
+
 .button-row button,
 .button-row a {
   margin-right: 8px;

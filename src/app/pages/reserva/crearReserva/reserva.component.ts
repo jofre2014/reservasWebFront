@@ -9,7 +9,7 @@ import { Reserva } from 'src/app/dto/reserva.dto';
 import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/services/service.index';
 import { ComponenteItem } from 'src/app/shared/modal/componente-item';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { GrupoProducto } from 'src/app/models/grupoProducto.model';
 import { GrupoProductoService } from 'src/app/services/grupoProducto/grupo-producto.service';
@@ -22,7 +22,9 @@ import { DatePipe } from '@angular/common';
 	styles: []
 })
 export class ReservaComponent implements OnInit {
-	datePicker = new FormControl();
+	public datePicker = new FormControl();
+
+	fechaServ;
 	model;
 	events: string[] = [];
 	reservas: Reserva[] = [];
@@ -44,7 +46,8 @@ export class ReservaComponent implements OnInit {
 		public _ms: ModalService,
 		private _activatedRoute: ActivatedRoute,
 		private _grupoProducto: GrupoProductoService,
-		private datePipe: DatePipe
+		private datePipe: DatePipe,
+		private router: Router
 	) {}
 
 	ngOnInit() {
@@ -89,6 +92,7 @@ export class ReservaComponent implements OnInit {
 							this.reservas.push(reservaTemp);
 						});
 					});
+					this.fechaServ = new Date(res.reservaPaxs.FechaServicio);
 					this.datePicker.setValue(new Date(res.reservaPaxs.FechaServicio));
 
 					this.recuperarCupos(this.datePicker);
@@ -187,6 +191,7 @@ export class ReservaComponent implements OnInit {
 		this.reservaService.generarReserva(this.reservas).subscribe((res) => {
 			if (res) {
 				this.reservas.length = 0;
+				this.router.navigate([ '/administrarReservaMat' ]);
 			}
 		});
 	}

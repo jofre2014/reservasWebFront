@@ -16,8 +16,11 @@
 
     <ng-container matColumnDef="fechainservicio">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Servicio </th>
-      <td mat-cell *matCellDef="let element"> {{element.fechainservicio | date:'yyyy-MM-dd'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.fechainservicio | date :'yyyy-MM-dd'}} {{element.fechainservicio }} </td>
+      
     </ng-container>
+
+ 
 
     <ng-container matColumnDef="nombrepax">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Pax </th>
